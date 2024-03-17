@@ -1,4 +1,4 @@
-package com.company.careerconnectapp.dto;
+package com.company.careerconnectapp.model;
 
 import lombok.Data;
 
@@ -6,7 +6,7 @@ import javax.persistence.*;
 
 @Data
 @Table(name = "personalDto")
-public class PersonalDto {
+public class PersonalInfo {
     @Id
     @Column(name = "person_id")
     @GeneratedValue(strategy = GenerationType.AUTO)
