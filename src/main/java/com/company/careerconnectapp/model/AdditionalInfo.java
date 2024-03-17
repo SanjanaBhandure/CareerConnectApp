@@ -1,20 +1,20 @@
 package com.company.careerconnectapp.model;
 
 import lombok.Data;
-import lombok.ToString;
 import javax.persistence.*;
 
+@Entity
 @Data
-@ToString
-@Table(name = "additionalInfoDto")
+@Table(name = "additional_info")
 public class AdditionalInfo {
     @Id
+    @Column(name = "reference_id")
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private String referenceId;
+    private Long referenceId;
     private String professionalSummary;
     private String achievements;
-    private String language;
-    private String references;
+    private String languages;
+    private String refer;
     private String hobbies;
     private String interests;
     private String portfolio;
@@ -24,4 +24,7 @@ public class AdditionalInfo {
     private String availability;
     private String visibility;
     private String jobLookingFlag;
+
+    @OneToOne(mappedBy = "additionalInfo")
+    private PersonalInfo personalInfo;
 }

@@ -1,17 +1,16 @@
 package com.company.careerconnectapp.model;
 
 import lombok.Data;
-
 import javax.persistence.*;
 
+@Entity
 @Data
-@Table(name = "personalDto")
+@Table(name = "personal_info")
 public class PersonalInfo {
     @Id
     @Column(name = "person_id")
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @JoinTable(name = "additionalInfoDto", joinColumns = @JoinColumn(name = "referenceId"))
-    private String personId;
+    private Long personId;
     private String fullName;
     private String contactInfo;
     private String location;
@@ -36,4 +35,7 @@ public class PersonalInfo {
     private String startYear;
     private String endYear;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "additional_info_id", referencedColumnName = "reference_id")
+    private AdditionalInfo additionalInfo;
 }
