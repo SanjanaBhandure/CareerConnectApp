@@ -6,5 +6,11 @@ import lombok.Data;
 public class ResponseDto {
     String message;
     Object data;
-    String code;
+    int code;
+
+    public ResponseDto(int code, String message, Object data) {
+        this.code = code;
+        this.message = message;
+        this.data = data;
+    }
 }
