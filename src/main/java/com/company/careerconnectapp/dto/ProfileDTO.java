@@ -1,17 +1,6 @@
-package com.company.careerconnectapp.model;
+package com.company.careerconnectapp.dto;
 
-import lombok.Data;
-
-import javax.persistence.*;
-
-@Data
-@Table(name = "personalDto")
-public class PersonalInfo {
-    @Id
-    @Column(name = "person_id")
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @JoinTable(name = "additionalInfoDto", joinColumns = @JoinColumn(name = "referenceId"))
-    private String personId;
+public class ProfileDTO {
     private String fullName;
     private String contactInfo;
     private String location;
@@ -35,5 +24,18 @@ public class PersonalInfo {
     private String fieldOfStudy;
     private String startYear;
     private String endYear;
+    private String professionalSummary;
+    private String achievements;
+    private String language;
+    private String references;
+    private String hobbies;
+    private String interests;
+    private String portfolio;
+    private String socialMediaProfile;
+    private String desiredJobProfile;
+    private String salaryRange;
+    private String availability;
+    private String visibility;
+    private String jobLookingFlag;
 
 }

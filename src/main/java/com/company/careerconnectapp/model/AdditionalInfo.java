@@ -2,13 +2,15 @@ package com.company.careerconnectapp.model;
 
 import lombok.Data;
 import lombok.ToString;
-
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Data
 @ToString
 @Table(name = "additionalInfoDto")
 public class AdditionalInfo {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private String referenceId;
     private String professionalSummary;
     private String achievements;
     private String language;
