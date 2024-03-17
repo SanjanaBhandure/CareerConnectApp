@@ -26,6 +26,6 @@ public class UserController {
     @PostMapping("/create")
     public ResponseEntity<?> addPersonalInfo(@RequestBody ProfileDTO profileDTO) {
 
-        return ResponseEntity.ok(new ResponseDto(HttpStatus.OK.value(), appConstants.SUCCESSFUL_RESPONSE_MESSAGE, new JSONObject().put("message", "Hello Sanjana").toMap()));
+        return ResponseEntity.ok(new ResponseDto(HttpStatus.OK.value(), appConstants.SUCCESSFUL_RESPONSE_MESSAGE, new JSONObject().toMap()));
     }
 }
