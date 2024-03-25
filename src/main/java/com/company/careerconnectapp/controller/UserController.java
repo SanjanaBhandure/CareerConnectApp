@@ -4,9 +4,8 @@ import com.company.careerconnectapp.dto.ProfileDTO;
 import com.company.careerconnectapp.dto.ResponseDto;
 import com.company.careerconnectapp.service.UserService;
 import com.company.careerconnectapp.util.AppConstants;
-import org.json.JSONObject;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -14,18 +13,15 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/careerConnect/user")
 public class UserController {
 
-    private final AppConstants appConstants;
     private final UserService userService;
 
 
     public UserController(AppConstants appConstants, UserService userService) {
-        this.appConstants = appConstants;
         this.userService = userService;
     }
 
     @PostMapping("/create")
-    public ResponseEntity<?> addPersonalInfo(@RequestBody ProfileDTO profileDTO) {
-
-        return ResponseEntity.ok(new ResponseDto(HttpStatus.OK.value(), appConstants.SUCCESSFUL_RESPONSE_MESSAGE, new JSONObject().toMap()));
+    public ResponseEntity<?> addPersonalInfo(@Validated @RequestBody ProfileDTO profileDTO) {
+        return userService.createDetails(profileDTO);
     }
 }
