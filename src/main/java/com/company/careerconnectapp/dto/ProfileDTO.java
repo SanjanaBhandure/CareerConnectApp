@@ -1,7 +1,14 @@
 package com.company.careerconnectapp.dto;
 
-import com.sun.istack.NotNull;
+import lombok.Getter;
+import lombok.Setter;
+import org.springframework.validation.annotation.Validated;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
 
+@Getter
+@Setter
+@Validated
 public class ProfileDTO {
     @NotNull
     private String fullName;
@@ -53,5 +60,7 @@ public class ProfileDTO {
     private String visibility;
     @NotNull
     private String jobLookingFlag;
+    @Email
+    private String email;
 
 }

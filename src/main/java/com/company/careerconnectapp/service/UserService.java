@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public interface UserService {
-    public ResponseEntity<?> createDetails(ProfileDTO profileDTO);
+    ResponseEntity<?> createDetails(ProfileDTO profileDTO);
+    ResponseEntity<?> createAdditionalDetails(ProfileDTO profileDTO);
 
 }

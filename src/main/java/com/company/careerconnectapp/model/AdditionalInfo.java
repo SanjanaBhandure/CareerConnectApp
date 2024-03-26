@@ -1,10 +1,14 @@
 package com.company.careerconnectapp.model;
 
+import com.company.careerconnectapp.dto.ProfileDTO;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 
 @Entity
 @Data
+@NoArgsConstructor
 @Table(name = "additional_info")
 public class AdditionalInfo {
     @Id
@@ -27,4 +31,20 @@ public class AdditionalInfo {
 
     @OneToOne(mappedBy = "additionalInfo")
     private PersonalInfo personalInfo;
+
+    public AdditionalInfo(ProfileDTO profileDTO) {
+        this.professionalSummary = profileDTO.getProfessionalSummary();
+        this.achievements = profileDTO.getAchievements();
+        this.languages = profileDTO.getLanguage();
+        this.refer = profileDTO.getReferences();
+        this.hobbies = profileDTO.getHobbies();
+        this.interests = profileDTO.getInterests();
+        this.portfolio = profileDTO.getPortfolio();
+        this.socialMediaProfile = profileDTO.getSocialMediaProfile();
+        this.desiredJobProfile = profileDTO.getDesiredJobProfile();
+        this.salaryRange = profileDTO.getSalaryRange();
+        this.availability = profileDTO.getAvailability();
+        this.visibility = profileDTO.getVisibility();
+        this.jobLookingFlag = profileDTO.getJobLookingFlag();
+    }
 }

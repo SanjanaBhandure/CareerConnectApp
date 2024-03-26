@@ -2,9 +2,12 @@ package com.company.careerconnectapp.controller;
 
 import com.company.careerconnectapp.dto.ProfileDTO;
 import com.company.careerconnectapp.service.UserService;
+import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @RestController
 @CrossOrigin(origins = "*")
@@ -18,8 +21,13 @@ public class UserController {
         this.userService = userService;
     }
 
-    @PostMapping("/create")
-    public ResponseEntity<?> addPersonalInfo(@Validated @RequestBody ProfileDTO profileDTO) {
+    @PostMapping("/createPersonalDetails")
+    public ResponseEntity<?> addPersonalInfo(@Valid @RequestBody ProfileDTO profileDTO) {
         return userService.createDetails(profileDTO);
+    }
+
+    @PostMapping("/updateAdditionalDetails")
+    public ResponseEntity<?> addAdditionalInfo(@Validated @RequestBody ProfileDTO profileDTO) {
+        return userService.createAdditionalDetails(profileDTO);
     }
 }
