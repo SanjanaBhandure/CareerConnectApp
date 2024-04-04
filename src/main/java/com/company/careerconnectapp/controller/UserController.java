@@ -30,12 +30,12 @@ public class UserController {
     }
 
     @PostMapping("/updatePersonalDetails")
-    public ResponseEntity<?> updatePersonalDetails(@Validated @RequestBody ProfileDTO profileDTO) {
+    public ResponseEntity<?> updatePersonalDetail(@Validated @RequestBody ProfileDTO profileDTO) {
         return userService.updatePersonalDetails(profileDTO);
     }
 
     @PostMapping("/updateAdditionalDetails")
-    public ResponseEntity<?> updateAdditionalDetails(@Validated @RequestBody ProfileDTO profileDTO) {
+    public ResponseEntity<?> updateAdditionalDetail(@Validated @RequestBody ProfileDTO profileDTO) {
         return userService.updateAdditionalDetails(profileDTO);
     }
 
