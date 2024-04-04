@@ -39,4 +39,19 @@ public class UserServiceImpl implements UserService {
         additionalInfoRepository.save(additionalInfo);
         return ResponseEntity.ok(new ResponseDto(HttpStatus.OK.value(), appConstants.SUCCESSFUL_RESPONSE_MESSAGE, response.toMap()));
     }
+
+    public ResponseEntity<?> updatePersonalDetails(ProfileDTO profileDTO) {
+        JSONObject response = new JSONObject();
+        PersonalInfo personalInfo = new PersonalInfo(profileDTO);
+        personalInfoRepository.save(personalInfo);
+        return ResponseEntity.ok(new ResponseDto(HttpStatus.OK.value(), appConstants.SUCCESSFUL_RESPONSE_MESSAGE, response.toMap()));
+    }
+
+    public ResponseEntity<?> updateAdditionalDetails(ProfileDTO profileDTO) {
+        JSONObject response = new JSONObject();
+        AdditionalInfo additionalInfo = new AdditionalInfo(profileDTO);
+        additionalInfoRepository.save(additionalInfo);
+        return ResponseEntity.ok(new ResponseDto(HttpStatus.OK.value(), appConstants.SUCCESSFUL_RESPONSE_MESSAGE, response.toMap()));
+    }
+
 }
