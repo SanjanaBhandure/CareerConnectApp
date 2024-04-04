@@ -23,4 +23,9 @@ public class CompanyController {
         return companyService.createPost(companyDto);
     }
 
+    @PostMapping("/updatePost")
+    public ResponseEntity<?> updatePosts(@Validated @RequestBody CompanyDto companyDto) {
+        return companyService.updatePost(companyDto);
+    }
+
 }

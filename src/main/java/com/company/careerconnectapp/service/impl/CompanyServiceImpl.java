@@ -28,4 +28,11 @@ public class CompanyServiceImpl implements CompanyService {
         companyDetailRepository.save(companyDetails);
         return ResponseEntity.ok(new ResponseDto(HttpStatus.OK.value(), appConstants.SUCCESSFUL_RESPONSE_MESSAGE, response.toMap()));
     }
+
+    public ResponseEntity<?> updatePost(CompanyDto companyDto) {
+        JSONObject response = new JSONObject();
+        CompanyDetails companyDetails = new CompanyDetails(companyDto);
+        companyDetailRepository.save(companyDetails);
+        return ResponseEntity.ok(new ResponseDto(HttpStatus.OK.value(), appConstants.SUCCESSFUL_RESPONSE_MESSAGE, response.toMap()));
+    }
 }
