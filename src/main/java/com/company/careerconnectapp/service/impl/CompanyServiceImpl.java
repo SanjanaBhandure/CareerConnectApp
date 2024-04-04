@@ -31,7 +31,8 @@ public class CompanyServiceImpl implements CompanyService {
 
     public ResponseEntity<?> updatePost(CompanyDto companyDto) {
         JSONObject response = new JSONObject();
-        CompanyDetails companyDetails = new CompanyDetails(companyDto);
+        CompanyDetails companyDetails = companyDetailRepository.findDistinctById(companyDto.getId());
+        companyDetails.updateCompanyDetails(companyDto);
         companyDetailRepository.save(companyDetails);
         return ResponseEntity.ok(new ResponseDto(HttpStatus.OK.value(), appConstants.SUCCESSFUL_RESPONSE_MESSAGE, response.toMap()));
     }

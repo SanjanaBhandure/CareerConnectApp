@@ -29,4 +29,12 @@ public class CompanyDetails {
         this.experience = companyDto.getExperience();
         this.description = companyDto.getDescription();
     }
+
+    public void updateCompanyDetails(CompanyDto companyDto) {
+        this.companyName = companyDto.getCompanyName();
+        this.profile = companyDto.getProfile();
+        this.skills = companyDto.getSkills();
+        this.experience = companyDto.getExperience();
+        this.description = companyDto.getDescription();
+    }
 }

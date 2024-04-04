@@ -35,21 +35,26 @@ public class UserServiceImpl implements UserService {
 
     public ResponseEntity<?> createAdditionalDetails(ProfileDTO profileDTO) {
         JSONObject response = new JSONObject();
+        PersonalInfo personalInfo = personalInfoRepository.findDistinctByPersonId(profileDTO.getId());
         AdditionalInfo additionalInfo = new AdditionalInfo(profileDTO);
+        personalInfo.setAdditionalInfo(additionalInfo);
+        personalInfoRepository.save(personalInfo);
         additionalInfoRepository.save(additionalInfo);
         return ResponseEntity.ok(new ResponseDto(HttpStatus.OK.value(), appConstants.SUCCESSFUL_RESPONSE_MESSAGE, response.toMap()));
     }
 
     public ResponseEntity<?> updatePersonalDetails(ProfileDTO profileDTO) {
         JSONObject response = new JSONObject();
-        PersonalInfo personalInfo = new PersonalInfo(profileDTO);
+        PersonalInfo personalInfo = personalInfoRepository.findDistinctByPersonId(profileDTO.getId());
+        personalInfo.update(profileDTO);
         personalInfoRepository.save(personalInfo);
         return ResponseEntity.ok(new ResponseDto(HttpStatus.OK.value(), appConstants.SUCCESSFUL_RESPONSE_MESSAGE, response.toMap()));
     }
 
     public ResponseEntity<?> updateAdditionalDetails(ProfileDTO profileDTO) {
         JSONObject response = new JSONObject();
-        AdditionalInfo additionalInfo = new AdditionalInfo(profileDTO);
+        AdditionalInfo additionalInfo = additionalInfoRepository.findDistinctByReferenceId(profileDTO.getId());
+        additionalInfo.update(profileDTO);
         additionalInfoRepository.save(additionalInfo);
         return ResponseEntity.ok(new ResponseDto(HttpStatus.OK.value(), appConstants.SUCCESSFUL_RESPONSE_MESSAGE, response.toMap()));
     }

@@ -7,6 +7,7 @@ import javax.validation.constraints.Email;
 @Getter
 @Setter
 public class ProfileDTO {
+    private Long id;
     private String fullName;
     private String contactInfo;
     private String location;
