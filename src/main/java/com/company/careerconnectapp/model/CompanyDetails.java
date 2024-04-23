@@ -1,10 +1,10 @@
 package com.company.careerconnectapp.model;
 
 import com.company.careerconnectapp.dto.CompanyDto;
+import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
 
 @Entity
 @Data
