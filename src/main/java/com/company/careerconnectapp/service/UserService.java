@@ -1,5 +1,6 @@
 package com.company.careerconnectapp.service;
 
+import com.company.careerconnectapp.dto.ApplyPostDto;
 import com.company.careerconnectapp.dto.ProfileDTO;
 import com.company.careerconnectapp.model.User;
 import jakarta.servlet.http.HttpServletRequest;
@@ -15,7 +16,7 @@ public interface UserService {
     ResponseEntity<?> updatePersonalDetails(ProfileDTO profileDto);
     ResponseEntity<?> updateAdditionalDetails(ProfileDTO profileDto);
     public List<User> findAllUsers();
-
     User validateUSer(HttpServletRequest request);
+    ResponseEntity<?> apply(ApplyPostDto applyPostDto);
 
 }

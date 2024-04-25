@@ -1,16 +1,16 @@
 package com.company.careerconnectapp.service.impl;
 
 import com.company.careerconnectapp.config.JwtTokenProvider;
+import com.company.careerconnectapp.dto.ApplyPostDto;
 import com.company.careerconnectapp.dto.ProfileDTO;
 import com.company.careerconnectapp.dto.ResponseDto;
 import com.company.careerconnectapp.exception.UserException;
-import com.company.careerconnectapp.model.AdditionalInfo;
-import com.company.careerconnectapp.model.PersonalInfo;
-import com.company.careerconnectapp.model.Role;
-import com.company.careerconnectapp.model.User;
+import com.company.careerconnectapp.model.*;
 import com.company.careerconnectapp.repository.AdditionalInfoRepository;
+import com.company.careerconnectapp.repository.CompanyDetailRepository;
 import com.company.careerconnectapp.repository.PersonalInfoRepository;
 import com.company.careerconnectapp.repository.UserRepository;
+import com.company.careerconnectapp.service.CompanyService;
 import com.company.careerconnectapp.service.UserService;
 import com.company.careerconnectapp.util.AppConstants;
 import jakarta.servlet.http.HttpServletRequest;
@@ -30,13 +30,15 @@ public class UserServiceImpl implements UserService {
     private final AdditionalInfoRepository additionalInfoRepository;
     private UserRepository userRepository;
     private JwtTokenProvider jwtTokenProvider;
+    private CompanyDetailRepository companyDetailRepository;
     public UserServiceImpl(AppConstants appConstants, PersonalInfoRepository personalInfoRepository, AdditionalInfoRepository additionalInfoRepository,
-                           UserRepository userRepository, JwtTokenProvider jwtTokenProvider) {
+                           UserRepository userRepository, JwtTokenProvider jwtTokenProvider, CompanyDetailRepository companyDetailRepository) {
         this.appConstants = appConstants;
         this.personalInfoRepository = personalInfoRepository;
         this.additionalInfoRepository = additionalInfoRepository;
         this.userRepository=userRepository;
         this.jwtTokenProvider=jwtTokenProvider;
+        this.companyDetailRepository = companyDetailRepository;
     }
 
     public ResponseEntity<?> createDetails(ProfileDTO profileDTO) {
@@ -90,6 +92,28 @@ public class UserServiceImpl implements UserService {
     public User validateUSer(HttpServletRequest request) {
         User user = userRepository.findDistinctByEmail((String) request.getAttribute("userId"));
         return user;
+    }
+
+    @Override
+    public ResponseEntity<?> apply(ApplyPostDto applyPostDto) {
+        PersonalInfo personalInfo = null;
+        CompanyDetails companyDetails = null;
+        Optional<PersonalInfo> user = personalInfoRepository.findById(applyPostDto.getUserId());
+        if (user.isPresent()) {
+            personalInfo = user.get();
+        }
+        Optional<CompanyDetails> comp = companyDetailRepository.findById(applyPostDto.getCompanyId());
+        if (comp.isPresent()) {
+            companyDetails = comp.get();
+        }
+        if (personalInfo != null && companyDetails != null) {
+            personalInfo.getAppliedCompanies().add(companyDetails);
+            personalInfoRepository.save(personalInfo);
+            return ResponseEntity.ok("Applied");
+        } else {
+            return ResponseEntity.status(400).body("Failed to Apply, Try after Sometime");
+        }
+
     }
 
 }

@@ -1,5 +1,6 @@
 package com.company.careerconnectapp.controller;
 
+import com.company.careerconnectapp.dto.ApplyPostDto;
 import com.company.careerconnectapp.dto.ProfileDTO;
 import com.company.careerconnectapp.exception.UserException;
 import com.company.careerconnectapp.model.Role;
@@ -10,6 +11,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Arrays;
 
 
 @RestController
@@ -46,7 +49,7 @@ public class UserController {
     @PostMapping("/updatePersonalDetails")
     public ResponseEntity<?> updatePersonalDetail(@Validated @RequestBody ProfileDTO profileDTO, HttpServletRequest request) {
         User user = userService.validateUSer(request);
-        if (user != null && user.getRole().equals(Role.USER)) {
+        if (user != null && (Arrays.asList((Role.USER), Role.HR).contains(user.getRole()))) {
             return userService.updatePersonalDetails(profileDTO);
         }
         return ResponseEntity.status(401).body("UnAuthorised");
@@ -57,6 +60,15 @@ public class UserController {
         User user = userService.validateUSer(request);
         if (user != null && user.getRole().equals(Role.USER)) {
             return userService.updateAdditionalDetails(profileDTO);
+        }
+        return ResponseEntity.status(401).body("UnAuthorised");
+    }
+
+    @PostMapping("/applyCompany")
+    public ResponseEntity<?> applyToCompany(@Validated @RequestBody ApplyPostDto applyPostDto, HttpServletRequest request) {
+        User user = userService.validateUSer(request);
+        if (user != null && user.getRole().equals(Role.USER)) {
+            return userService.apply(applyPostDto);
         }
         return ResponseEntity.status(401).body("UnAuthorised");
     }

@@ -43,4 +43,19 @@ public class CompanyController {
         return ResponseEntity.status(401).body("UnAuthorised");
     }
 
+    @PostMapping("/fetchCompanies")
+    public ResponseEntity<?> fetchCompany(@Validated @RequestBody CompanyDto companyDto, HttpServletRequest request) {
+        User user = userService.validateUSer(request);
+        if (user != null && user.getRole().equals(Role.HR)) {
+
+        } else if(user != null && user.getRole().equals(Role.USER)) {
+
+        } else if(user != null && user.getRole().equals(Role.ADMIN)) {
+
+        }
+        return ResponseEntity.status(401).body("UnAuthorised");
+    }
+
+
+
 }

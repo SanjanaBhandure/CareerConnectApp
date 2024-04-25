@@ -5,6 +5,9 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.HashSet;
+import java.util.Set;
+
 
 @Entity
 @Data
@@ -43,6 +46,10 @@ public class PersonalInfo {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "additional_info_id", referencedColumnName = "reference_id")
     private AdditionalInfo additionalInfo;
+
+    @OneToMany(mappedBy = "persionalinfo")
+    @Column(name = "applied_companies")
+    private Set<CompanyDetails> appliedCompanies = new HashSet<>();
 
     public PersonalInfo(ProfileDTO profileDTO) {
         this.fullName = profileDTO.getFullName();
