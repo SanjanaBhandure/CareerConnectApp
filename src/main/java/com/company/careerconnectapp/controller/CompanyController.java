@@ -1,6 +1,7 @@
 package com.company.careerconnectapp.controller;
 
 import com.company.careerconnectapp.dto.CompanyDto;
+import com.company.careerconnectapp.dto.FetchCompanyListDto;
 import com.company.careerconnectapp.model.Role;
 import com.company.careerconnectapp.model.User;
 import com.company.careerconnectapp.service.CompanyService;
@@ -44,14 +45,14 @@ public class CompanyController {
     }
 
     @PostMapping("/fetchCompanies")
-    public ResponseEntity<?> fetchCompany(@Validated @RequestBody CompanyDto companyDto, HttpServletRequest request) {
+    public ResponseEntity<?> fetchCompany(@Validated @RequestBody FetchCompanyListDto companyDto, HttpServletRequest request) {
         User user = userService.validateUSer(request);
         if (user != null && user.getRole().equals(Role.HR)) {
-
+            return companyService.fetchData(companyDto.getHrId());
         } else if(user != null && user.getRole().equals(Role.USER)) {
-
+            return companyService.fetchData(companyDto.getUserId());
         } else if(user != null && user.getRole().equals(Role.ADMIN)) {
-
+            return companyService.fetchData(null);
         }
         return ResponseEntity.status(401).body("UnAuthorised");
     }

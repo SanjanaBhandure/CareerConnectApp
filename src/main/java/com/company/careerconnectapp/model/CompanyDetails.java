@@ -20,7 +20,7 @@ public class CompanyDetails {
     private String experience;
     private String description;
 
-    private String userId;
+    private Long ownerId;
 
     public CompanyDetails(CompanyDto companyDto) {
         this.companyName = companyDto.getCompanyName();
@@ -28,6 +28,7 @@ public class CompanyDetails {
         this.skills = companyDto.getSkills();
         this.experience = companyDto.getExperience();
         this.description = companyDto.getDescription();
+        this.ownerId = companyDto.getHrId();
     }
 
     public void updateCompanyDetails(CompanyDto companyDto) {

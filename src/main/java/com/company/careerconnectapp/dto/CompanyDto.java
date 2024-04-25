@@ -12,5 +12,5 @@ public class CompanyDto {
     String profile;
     String skills;
     String description;
-
+    Long hrId;
 }
