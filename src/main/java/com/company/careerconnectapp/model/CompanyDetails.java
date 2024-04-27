@@ -22,6 +22,9 @@ public class CompanyDetails {
 
     private Long ownerId;
 
+    @ManyToOne
+    private PersonalInfo persionalinfo;
+
     public CompanyDetails(CompanyDto companyDto) {
         this.companyName = companyDto.getCompanyName();
         this.profile = companyDto.getProfile();
